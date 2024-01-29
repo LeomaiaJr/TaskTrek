@@ -1,5 +1,5 @@
 import prisma from 'db';
-import { TaskCreateDTO, TaskUpdateDTO } from './dto/Task.dto';
+import { ListTaskDTO, TaskCreateDTO, TaskUpdateDTO } from './dto/Task.dto';
 
 export class TaskService {
   static async createTask(data: TaskCreateDTO) {
@@ -15,8 +15,19 @@ export class TaskService {
     });
   }
 
-  static async getAllTasks() {
-    return await prisma.task.findMany();
+  static async getAllTasks(params: ListTaskDTO = {}) {
+    const { search } = params;
+
+    return await prisma.task.findMany({
+      orderBy: [
+        {
+          date: 'desc',
+        },
+      ],
+      ...(search
+        ? { where: { title: { contains: search, mode: 'insensitive' } } }
+        : {}),
+    });
   }
 
   static async getTaskById(id: number) {

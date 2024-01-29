@@ -16,7 +16,7 @@ export const TaskItem = ({ task }: TaskItemProps) => {
     <div key={id} className="border p-4 rounded-lg shadow-md">
       <div className="flex flex-row justify-between gap-4">
         <Link
-          to={`/tasks/${id}`}
+          to={`/tasks/update/${id}`}
           className={`text-lg ${
             isCompleted ? 'line-through text-gray-500' : 'text-blue-600'
           }`}

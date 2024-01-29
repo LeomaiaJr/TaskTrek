@@ -1,6 +1,7 @@
 import { ActionFunctionArgs, json, redirect } from '@remix-run/node';
 import { Form, useActionData } from '@remix-run/react';
 import { TaskService } from '~/api/task';
+import { Field } from '~/components/Field/Field';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const formData = await request.formData();
@@ -33,29 +34,27 @@ export default function CreateTask() {
       <h1 className="text-2xl font-bold text-center mb-4">Create Task</h1>
       <div className="border p-4 rounded-lg shadow-md">
         <Form method="post" className="flex flex-col gap-4">
-          <div className="flex flex-col gap-1">
-            <label htmlFor="title">
-              Title<span className="font-bold text-red">*</span>:
-            </label>
+          <Field
+            label="Title"
+            name="title"
+            required
+            error={actionData?.errors?.title}
+          >
             <input
               className="border-2 border-gray-300 bg-white h-10 px-3 rounded-lg text-sm focus:outline-none"
               type="text"
               name="title"
               id="title"
             />
+          </Field>
 
-            {actionData?.errors?.title && (
-              <p className="text-red text-sm">{actionData.errors.title}</p>
-            )}
-          </div>
-          <div className="flex flex-col gap-1">
-            <label htmlFor="description">Description: </label>
+          <Field label="Description" name="description">
             <textarea
               name="description"
               id="description"
               className="border-2 border-gray-300 h-40 bg-white py-2 px-3 rounded-lg text-sm focus:outline-none"
             ></textarea>
-          </div>
+          </Field>
 
           <div className="mt-4 flex items-center justify-center">
             <button

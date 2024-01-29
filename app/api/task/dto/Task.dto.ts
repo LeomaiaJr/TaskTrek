@@ -12,3 +12,7 @@ export interface TaskDTO {
 }
 
 export interface TaskUpdateDTO extends Partial<Omit<TaskDTO, 'id' | 'date'>> {}
+
+export interface ListTaskDTO {
+  search?: string | null;
+}
