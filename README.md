@@ -59,7 +59,13 @@ TaskTrek is a ToDoList application designed to help users manage their tasks eff
    npm install
    ```
 
-3. **Run the Development Server:**
+3. **Run migrations:**
+
+   ```sh
+   npx prisma migrate dev
+   ```
+
+4. **Run the Development Server:**
 
    ```sh
    npm run dev
